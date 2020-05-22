@@ -6,6 +6,7 @@ namespace Core;
 use Controller\TableController;
 use Model\DbTable;
 use mysqli;
+use View\View;
 
 class Dispatcher
 {
@@ -18,16 +19,22 @@ class Dispatcher
         include __DIR__ . "/../../config/config.php";
         // ?action=show
         // ?action=add
-        // print_r($config);
-        $controller = new TableController(new DbTable(
-            new mysqli(
-                $config['mysql']['host'],
-                $config['mysql']['user'],
-                $config['mysql']['password'],
-                $config['mysql']['database']
+
+        $view =  new View();
+        $view->setLayout('mainLayout');
+
+        $controller = new TableController(
+            new DbTable(
+                new mysqli(
+                    $config['mysql']['host'],
+                    $config['mysql']['user'],
+                    $config['mysql']['password'],
+                    $config['mysql']['database']
+                ),
+                $config['mysql']['table']
             ),
-            $config['mysql']['table']
-        ));
+            $view
+        );
 
         $action = "action" . $_GET["action"];
 
