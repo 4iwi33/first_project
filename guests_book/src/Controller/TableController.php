@@ -20,7 +20,10 @@ class TableController
     public function actionShow()
     {
         // print_r($this->table->get());
-        $this->view->setData(['table' => $this->table->get()])->view();
+        $this
+            ->view
+            ->setData(['table' => $this->table->get()])
+            ->view();
     }
 }
-//
+
