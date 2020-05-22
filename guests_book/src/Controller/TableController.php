@@ -23,3 +23,4 @@ class TableController
         $this->view->setData(['table' => $this->table->get()])->view();
     }
 }
+//
